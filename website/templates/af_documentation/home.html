@@ -38,7 +38,11 @@
                 <h3>{{ node.title }}</h3>
                 <div class="row">
                     <div class="large-12 columns">
-                            <p>{% inplace_edit "node.main_text|safe" %}</p>{% for process in node.process_chain.all %}<i data-processID="{{ process.pk }}"class="foundicon-graph showGraph"></i>{% endfor %}
+                            <p>{% inplace_edit "node.main_text|safe" %}</p>
+                            <p>{% inplace_edit "node.Content|safe" %}</p>
+                            {% for process in node.process_chain.all %}
+                                <i data-processID="{{ process.pk }}"class="foundicon-graph showGraph"></i>
+                            {% endfor %}
 
 
                 {% if not node.is_leaf_node %}

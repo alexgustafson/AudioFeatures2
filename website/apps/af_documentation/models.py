@@ -4,9 +4,14 @@ from django.utils.translation import ugettext as _
 
 
 LANGUAGES = [
-             ('de', 'Deutsch'),
-             ('en', 'English'),
-             ]
+    ('de', 'Deutsch'),
+    ('en', 'English'), ]
+
+CONTENT_TYPES = [
+    ('text', 'Text'),
+    ('fig', 'Figure'),
+    ('process', 'Process'), ]
+
 
 class Section(MPTTModel):
     title = models.CharField(_('Title'), max_length=120,)
@@ -23,11 +28,22 @@ class Section(MPTTModel):
         return "%s" % self.title
 
 
-class TextContent(models.Model):
-    parent_section = models.ForeignKey(_('Parent Section'), null=True, blank=True, related_name='Text')
+class ContentNode(models.Model):
+    parent_section = models.ForeignKey('Section', null=True, blank=True, related_name='Content')
     order = models.IntegerField(_('Order'), blank=True, null=True)
 
+    type = models.CharField(_('Content Type'), max_length=10, choices=CONTENT_TYPES, default='text')
 
+    text_content = models.ForeignKey('TextContent')
+    figure_content = models.ForeignKey('FigureContent')
+
+
+class TextContent(models.Model):
+    main_text = models.TextField(_('Main Text'), blank=True, null=True)
+
+
+class FigureContent(models.Model):
+    image = models.ImageField(_('Figure'), null=True, blank=True, upload_to="figures", )
 
 
 class Source(models.Model):
