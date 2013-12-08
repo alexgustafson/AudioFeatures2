@@ -1,0 +1,35 @@
+@import "settings";
+@import "foundation";
+
+body{
+  font-family: 'Computer Modern Serif';;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Computer Modern Serif';
+  font-weight: 300;
+  font-style: normal;
+  color: #222222;
+  text-rendering: optimizeLegibility;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.level_0 {
+  h3{
+    font-size: 1.4em;
+  }
+}
+
+.level_1 {
+  h3{
+    font-size: 1.2em;
+  }
+}
+
+.level_2 {
+  h3{
+    font-size: 1.0em;
+  }
+}

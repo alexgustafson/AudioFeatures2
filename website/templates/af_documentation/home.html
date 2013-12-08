@@ -1,0 +1,73 @@
+{% load mptt_tags inplace_edit %}
+
+<!DOCTYPE html>
+<!--[if IE 8]>                                  <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<head>
+        <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Semester Arbeit 2013</title>
+
+  
+  <link rel="stylesheet" href="{{ STATIC_URL }}stylesheets/app.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}fonts/ComputerModern/Serif/cmun-serif.css"
+
+  {% inplace_css 1 %}
+
+  <script src="{{ STATIC_URL }}js/app.js"></script>
+
+
+</head>
+<body>
+
+        <div class="row">
+                <div class="large-12 columns">
+                        <h2>Semester Project 2013</h2>
+                        <p>ZHAW, Zürich - Alex Gustafson</p>
+                        <hr />
+                </div>
+        </div>
+
+        <div class="row">
+                <div class="large-12 columns">
+
+
+            {% recursetree nodes %}
+            <div class="level_{{ node.level }}">
+                <h3>{{ node.title }}</h3>
+                <div class="row">
+                    <div class="large-12 columns">
+                            <p>{% inplace_edit "node.main_text|safe" %}</p>{% for process in node.process_chain.all %}<i data-processID="{{ process.pk }}"class="foundicon-graph showGraph"></i>{% endfor %}
+
+
+                {% if not node.is_leaf_node %}
+
+                        {{ children }}
+
+                {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            {% endrecursetree %}
+
+
+                </div>
+
+        </div>
+
+
+<script src="{{ STATIC_URL }}js/vendor/jquery.js"></script>
+{% inplace_js 1 1 %}
+
+  <script src="{{ STATIC_URL }}js/vendor/d3.v3.js"></script>
+  <script src="{{ STATIC_URL }}js/rickshaw.js"></script>
+
+
+  
+
+
+    <script src="{{ STATIC_URL }}js/main.js"></script>
+</body>
+</html>

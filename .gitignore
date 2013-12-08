@@ -1,0 +1,17 @@
+# ignore
+.DS_Store
+*.pyc
+.pydev*
+.project
+.settings
+.idea
+*.db
+env
+atlassian-ide-plugin.xml
+
+website/local_settings.py
+website/media
+website/logs
+website/env
+website/static
+#website/site-static
