@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'south',
     'audioFile',
     'treeadmin',
+    'common_utils',
 )
 
 # LANGUAGE SETTINGS

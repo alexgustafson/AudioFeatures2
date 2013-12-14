@@ -7707,32 +7707,36 @@ th.hide-for-touch {
 /* line 4, ../scss/app.scss */
 body {
   font-family: 'Computer Modern Serif';
-  padding-top: 2em;
 }
 
-/* line 9, ../scss/app.scss */
+/* line 8, ../scss/app.scss */
+.pagetitle {
+  padding-top: 3em;
+}
+
+/* line 12, ../scss/app.scss */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Computer Modern Serif';
   font-weight: 300;
   font-style: normal;
-  color: #222222;
+  color: #2c2e30;
   text-rendering: optimizeLegibility;
   margin-top: 0.2rem;
   margin-bottom: 0.5rem;
   line-height: 1.4;
 }
 
-/* line 21, ../scss/app.scss */
+/* line 24, ../scss/app.scss */
 .level_0 h3 {
   font-size: 1.4em;
 }
 
-/* line 27, ../scss/app.scss */
+/* line 30, ../scss/app.scss */
 .level_1 h3 {
   font-size: 1.2em;
 }
 
-/* line 33, ../scss/app.scss */
+/* line 36, ../scss/app.scss */
 .level_2 h3 {
   font-size: 1.0em;
 }
