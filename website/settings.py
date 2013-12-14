@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'treeadmin',
     'common_utils',
     'rest_framework',
+    'djangoplugins',
 )
 
 # LANGUAGE SETTINGS

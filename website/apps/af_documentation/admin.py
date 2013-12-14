@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Section, TextContent, FigureContent, ContentNode
+from models import Section, ContentNode
 from treeadmin.admin import TreeAdmin
 
 
