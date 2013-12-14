@@ -17,8 +17,28 @@ class Section(MPTTModel, Translatable, Timestampable):
     def __unicode__(self):
         return "%s" % self.title
 
+    def get_plugins(self):
+
+        plugins = []
+        for node in self.Content.all():
+            plugins.append(node.content_type)
+
+        return plugins
+
+    def get_rendered_content_items(self):
+
+        content_items = []
+        for node in self.Content.all():
+            content_items.append(node.render_content())
+
+        return content_items
+
 
 class ContentNode(models.Model):
     parent_section = models.ForeignKey('Section', null=True, blank=True, related_name='Content')
     body = models.TextField(default='')
     content_type = PluginField(AfContentType)
+
+    def render_content(self):
+        plugin_model = self.content_type.get_plugin()
+        return plugin_model.render_content(self.body)

@@ -4,8 +4,8 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from af_documentation.models import Section
-from af_documentation.serializers import SectionSerializer
+from af_documentation.models import Section, ContentNode
+from af_documentation.serializers import SectionSerializer, ContentNodeSerializer
 
 def home(request):
 
@@ -15,6 +15,8 @@ def home(request):
                       'nodes': Section.objects.all(),
                   })
 
+
+'''rest stuff'''
 class JSONResponse(HttpResponse):
     """
     An HttpResponse that renders its content into JSON.
@@ -31,8 +33,8 @@ def section_list(request):
     List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        snippets = Section.objects.all()
-        serializer = SectionSerializer(snippets, many=True)
+        section = Section.objects.all()
+        serializer = SectionSerializer(section, many=True)
         return JSONResponse(serializer.data)
 
     elif request.method == 'POST':
@@ -51,17 +53,17 @@ def section_detail(request, pk):
     Retrieve, update or delete a code snippet.
     """
     try:
-        snippet = Section.objects.get(pk=pk)
+        section = Section.objects.get(pk=pk)
     except Section.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = SectionSerializer(snippet)
+        serializer = SectionSerializer(section)
         return JSONResponse(serializer.data)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = SectionSerializer(snippet, data=data)
+        serializer = SectionSerializer(section, data=data)
         if serializer.is_valid():
             serializer.save()
             return JSONResponse(serializer.data)
@@ -69,5 +71,49 @@ def section_detail(request, pk):
             return JSONResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        snippet.delete()
+        section.delete()
+        return HttpResponse(status=204)
+
+
+@csrf_exempt
+def contentnode_list(request):
+
+    if request.method == 'GET':
+        contentnodes = Section.objects.all()
+        serializer = ContentNode(contentnodes, many=True)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = ContentNode(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data, status=201)
+        else:
+            return JSONResponse(serializer.errors, status=400)
+
+
+@csrf_exempt
+def contentnode_detail(request, pk):
+
+    try:
+        contentnode = ContentNode.objects.get(pk=pk)
+    except ContentNode.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = ContentNodeSerializer(contentnode)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = ContentNodeSerializer(contentnode, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data)
+        else:
+            return JSONResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        section.delete()
         return HttpResponse(status=204)

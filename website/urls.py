@@ -7,10 +7,13 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^restdocs/', include('af_documentation.urls')),
     url(r'^jsi18n/(?P<packages>\S+?)/$', 'django.views.i18n.javascript_catalog'),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 )
 
 urlpatterns += i18n_patterns('',
+
     url(r'^$', 'af_documentation.views.home', name='home'),
 
     url(r'^inplaceeditform/', include('inplaceeditform.urls')),
@@ -21,5 +24,4 @@ urlpatterns += i18n_patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 )

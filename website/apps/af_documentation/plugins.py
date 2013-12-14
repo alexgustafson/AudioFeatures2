@@ -6,7 +6,9 @@ class AfContentType(PluginPoint):
     point.
 
     """
-    pass
+    @classmethod
+    def render_content(self, content):
+        return content
 
 
 class TextContent(AfContentType):
@@ -17,3 +19,4 @@ class TextContent(AfContentType):
 class ImageContent(AfContentType):
     name = 'image-content'
     title = "Image Content"
+
