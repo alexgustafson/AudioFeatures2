@@ -20,4 +20,6 @@ urlpatterns += i18n_patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 )

@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'audioFile',
     'treeadmin',
     'common_utils',
+    'rest_framework',
 )
 
 # LANGUAGE SETTINGS
@@ -186,3 +187,16 @@ INPLACE_ENABLE_CLASS = 'enable'
 #ADAPTOR_INPLACEEDIT = {'myadaptor': 'app_name.fields.MyAdaptor'} # Explain in Adaptor API
 INPLACE_GET_FIELD_URL = None # to change the url where django-inplaceedit use to get a field
 INPLACE_SAVE_URL = None # to change the url where django-inplaceedit use to save a field
+
+REST_FRAMEWORK = {
+    # Use hyperlinked styles by default.
+    # Only used if the `serializer_class` attribute is not set on a view.
+    'DEFAULT_MODEL_SERIALIZER_CLASS':
+        'rest_framework.serializers.HyperlinkedModelSerializer',
+
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
