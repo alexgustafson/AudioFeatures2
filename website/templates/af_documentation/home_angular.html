@@ -14,13 +14,11 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}stylesheets/app.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}fonts/ComputerModern/Serif/cmun-serif.css"
 
-    {% inplace_css 1 %}
-
-    <script src="{{ STATIC_URL }}js/app.js"></script>
 
 
 </head>
-<body>
+<body ng-app="example.app.static">
+
 {% if user.is_staff %}
 
     <nav class="top-bar" data-topbar>
@@ -92,20 +90,34 @@
                     </div>
                 </div>
             {% endrecursetree %}
+            {% verbatim %}
 
+            <div class="content" ng-controller="AppController">
+                <div class="panel" ng-repeat="section in sections">
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title">{{ section.title }}</h3>
 
+                        <p ng-repeat="item in section.content">{{ item }}</p>
+                    </div>
+                </div>
+
+                <div>
+
+                </div>
+
+            </div>
+            {% endverbatim %}
         </div>
 
-    </div>
-</div>
 
-
-<script src="{{ STATIC_URL }}js/vendor/jquery.js"></script>
-{% inplace_js 1 1 %}
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
-<script src="{{ STATIC_URL }}js/angular-resource/angular-resource.js"></script>
-<script src="{{ STATIC_URL }}js/vendor/d3.v3.js"></script>
-<script src="{{ STATIC_URL }}js/rickshaw.js"></script>
+        <script src="{{ STATIC_URL }}js/vendor/jquery.js"></script>
+        {% inplace_js 1 1 %}
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+        <script src="{{ STATIC_URL }}js/angular-resource/angular-resource.js"></script>
+        <script src="{{ STATIC_URL }}js/app.js"></script>
+        <script src="{{ STATIC_URL }}js/app/services/section_service.js"
+        <script src="{{ STATIC_URL }}js/vendor/d3.v3.js"></script>
+        <script src="{{ STATIC_URL }}js/rickshaw.js"></script>
 
 
 

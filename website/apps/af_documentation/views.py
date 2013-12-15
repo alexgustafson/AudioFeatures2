@@ -13,7 +13,7 @@ from djangoplugins.models import Plugin
 def home(request):
 
     return render(request,
-                  'af_documentation/home.html',
+                  'af_documentation/home_angular.html',
                   {
                       'nodes': Section.objects.all(),
                   })
