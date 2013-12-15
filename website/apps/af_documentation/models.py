@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 from common_utils.behaviors import Translatable, Timestampable
 from djangoplugins.fields import PluginField
 from af_documentation.plugins import AfContentType
-
+import reversion
 
 
 class Section(MPTTModel, Translatable, Timestampable):
@@ -20,7 +20,7 @@ class Section(MPTTModel, Translatable, Timestampable):
     def get_plugins(self):
 
         plugins = []
-        for node in self.Content.all():
+        for node in self.content.all():
             plugins.append(node.content_type)
 
         return plugins
@@ -28,17 +28,20 @@ class Section(MPTTModel, Translatable, Timestampable):
     def get_rendered_content_items(self):
 
         content_items = []
-        for node in self.Content.all():
+        for node in self.content.all():
             content_items.append(node.render_content())
 
         return content_items
 
+reversion.register(Section)
 
 class ContentNode(models.Model):
-    parent_section = models.ForeignKey('Section', null=True, blank=True, related_name='Content')
+    parent_section = models.ForeignKey('Section', null=True, blank=True, related_name='content')
     body = models.TextField(default='')
     content_type = PluginField(AfContentType)
 
     def render_content(self):
         plugin_model = self.content_type.get_plugin()
         return plugin_model.render_content(self.body)
+
+reversion.register(ContentNode)

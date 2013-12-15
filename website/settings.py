@@ -130,6 +130,8 @@ INSTALLED_APPS = (
     'common_utils',
     'rest_framework',
     'djangoplugins',
+    'reversion',
+    'djangular',
 )
 
 # LANGUAGE SETTINGS

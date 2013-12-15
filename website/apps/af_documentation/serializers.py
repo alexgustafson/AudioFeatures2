@@ -5,7 +5,7 @@ from djangoplugins.models import Plugin
 class SectionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Section
-        fields = ('id', 'title', 'Content', 'language', )
+        fields = ('id', 'title', 'content', 'language', )
 
 
 class ContentNodeSerializer(serializers.HyperlinkedModelSerializer):

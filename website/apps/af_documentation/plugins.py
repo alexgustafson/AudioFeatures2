@@ -1,4 +1,5 @@
 from djangoplugins.point import PluginPoint
+from django.template import Context, loader
 
 class AfContentType(PluginPoint):
     """
@@ -6,14 +7,18 @@ class AfContentType(PluginPoint):
     point.
 
     """
-    @classmethod
     def render_content(self, content):
-        return content
+        t = loader.get_template('af_documentation/plugins/plugin_wrapper.html')
+        c = Context({'content': content,
+                     'plugin': self,
+                     })
+        return t.render(c)
 
 
 class TextContent(AfContentType):
     name = 'text-content'
     title = "Text Content"
+    fluff = 'more stuff'
 
 
 class ImageContent(AfContentType):
