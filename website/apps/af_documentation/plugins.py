@@ -18,7 +18,6 @@ class AfContentType(PluginPoint):
 class TextContent(AfContentType):
     name = 'text-content'
     title = "Text Content"
-    fluff = 'more stuff'
 
 
 class ImageContent(AfContentType):

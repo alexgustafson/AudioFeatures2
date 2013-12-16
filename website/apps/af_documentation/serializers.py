@@ -9,6 +9,7 @@ class SectionSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ContentNodeSerializer(serializers.HyperlinkedModelSerializer):
+
     class Meta:
         model = ContentNode
         fields = ('body', 'parent_section', 'content_type',)
