@@ -8,11 +8,25 @@
     '$scope', '$http', function($scope, $http) {
       $scope.sections = [];
       return $http.get('/restdocs/sections').then(function(result) {
-        return angular.forEach(result.data, function(item) {
-          return $scope.sections.push(item);
+        return angular.forEach(result.data, function(content) {
+
+
+          return $scope.sections.push(content);
         });
       });
+
     }
   ]);
+
+  app.controller('ContentController', ['$scope', '$http',  function ($scope, $http){
+        return $http.get($scope.$parent.item).then(function(result){$scope.body = result.data.body})
+
+    }]);
+
+
+
+
+
+
 
 }).call(this);
