@@ -12,7 +12,7 @@ class Timestampable(models.Model):
 
 
 class Translatable(models.Model):
-    language = models.CharField('Language', max_length=2, choices=settings.LANGUAGES, default='en')
+    language = models.CharField(_('Language'), max_length=2, choices=settings.LANGUAGES, default='en')
 
     class Meta:
         abstract = True
