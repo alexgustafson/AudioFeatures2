@@ -15,9 +15,8 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}fonts/ComputerModern/Serif/cmun-serif.css"
 
 
-
 </head>
-<body ng-app="example.app.static">
+<body ng-app="audiofeaturesapp">
 
 {% if user.is_staff %}
 
@@ -55,34 +54,47 @@
     <div class="row">
         <div class="large-12 columns">
 
-            {% verbatim %}
-
             <div class="content" ng-controller="AppController">
 
-                <div  ng-repeat="section in sections">
-                        <h3 class="panel-title">{{ section.title }}</h3>
-                        <div class="" ng-repeat="item in section.content">
+                <div ng-repeat="section in sections">
+                    <h3 class="panel-title">{$ section.title $}</h3>
 
-                            <div ng-controller="ContentController" ng-init="item_url = item">{{ body }}</div>
-                        </div>
+                    <div class="" ng-repeat="item in section.content">
+
+                        <div ng-controller="ContentController" ng-init="item_url = item">{$ body $}</div>
+                    </div>
 
                 </div>
 
 
-
             </div>
-            {% endverbatim %}
         </div>
 
 
         <script src="{{ STATIC_URL }}js/vendor/jquery.js"></script>
-        <script src="{{ STATIC_URL }}js/vendor/angular.min.js"></script>
+        <script src="{{ STATIC_URL }}js/vendor/angular/angular.js"></script>
+        <script src="{{ STATIC_URL }}js/vendor/angular/angular-resource.js"></script>
+        <script src="{{ STATIC_URL }}js/vendor/angular/angular-cookies.js"></script>
+        <script src="{{ STATIC_URL }}js/vendor/angular/angular-route.js"></script>
         <script src="{{ STATIC_URL }}js/app.js"></script>
         <script src="{{ STATIC_URL }}js/app/angular-resource.js"></script>
         <script src="{{ STATIC_URL }}js/vendor/d3.v3.js"></script>
         <script src="{{ STATIC_URL }}js/rickshaw.js"></script>
 
+        <script type="text/javascript">
 
+            angular.module('audiofeaturesapp').constant('urls', {
+                section: "{% url 'section-list' %}",
+                content: "{% url 'contentnode-list' %}",
+                plugin: "{% url 'plugin-list' %}"
+
+            });
+
+            angular.module('audiofeaturesapp').config(['$httpProvider', function ($httpProvider) {
+                $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
+            }]);
+
+        </script>
 
 </body>
 </html>

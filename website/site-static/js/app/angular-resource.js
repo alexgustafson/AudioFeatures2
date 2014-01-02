@@ -1,9 +1,18 @@
-var sectionServices = angular.module('sectionServices', ['ngResource'])
 
-sectionServices.factory('Sections', ['$resource',
-    function($resource) {
-        return $resource('/restdocs/sections', {}, {
-            query: {method: 'GET', params:{}, isArray:true}
-        });
-}])
+app.factory('Sections', ['$resource', 'urls',
+    function ($resource, urls) {
+        return $resource(
+            urls.section + '/:uuid',
+            {uuid: '@uuid'},
+            { update: { method: 'PUT' } }
+        );
+    }]);
 
+app.factory('Content', ['$resource', 'urls',
+    function ($resource, urls) {
+        return $resource(
+            urls.content + ':uuid',
+            {uuid: '@uuid'},
+            { update: { method: 'PUT'}}
+        );
+    }]);
