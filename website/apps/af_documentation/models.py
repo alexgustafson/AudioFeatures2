@@ -45,7 +45,6 @@ class ContentNode(models.Model):
     content_type = PluginField(AfContentType)
     uuid = UUIDField()
 
-
     def render_content(self):
         plugin_model = self.content_type.get_plugin()
         return plugin_model.render_content(self.body)

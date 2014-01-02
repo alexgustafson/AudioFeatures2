@@ -1,4 +1,4 @@
-var app = angular.module('audiofeaturesapp', ['ngCookies', 'ngResource', 'ngRoute'], function () {
+var app = angular.module('audiofeaturesapp', ['ngCookies', 'djangoRESTResources', 'ngRoute'], function () {
 })
 
 app.config(function ($httpProvider) {
@@ -17,10 +17,8 @@ app.controller('AppController', [
     }
 ]);
 
-app.controller('ContentController', ['$scope', '$http', function ($scope, $http) {
-    return $http.get($scope.$parent.item).then(function (result) {
-        $scope.body = result.data.body
-    })
+app.controller('ContentController', ['$scope', 'Content', function ($scope, Content) {
+        $scope.content = Content.query({ uuid:$scope.$parent.item})
 
 }]);
 

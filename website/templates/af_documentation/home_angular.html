@@ -12,8 +12,7 @@
 
 
     <link rel="stylesheet" href="{{ STATIC_URL }}stylesheets/app.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}fonts/ComputerModern/Serif/cmun-serif.css"
-
+    <link rel="stylesheet" href="{{ STATIC_URL }}fonts/ComputerModern/Serif/cmun-serif.css">
 
 </head>
 <body ng-app="audiofeaturesapp">
@@ -61,7 +60,7 @@
 
                     <div class="" ng-repeat="item in section.content">
 
-                        <div ng-controller="ContentController" ng-init="item_url = item">{$ body $}</div>
+                        <div ng-controller="ContentController">{$ content.body $}</div>
                     </div>
 
                 </div>
@@ -80,6 +79,7 @@
         <script src="{{ STATIC_URL }}js/app/angular-resource.js"></script>
         <script src="{{ STATIC_URL }}js/vendor/d3.v3.js"></script>
         <script src="{{ STATIC_URL }}js/rickshaw.js"></script>
+        <script src="{{ STATIC_URL }}js/angular-django-rest-resource.js"></script>
 
         <script type="text/javascript">
 
