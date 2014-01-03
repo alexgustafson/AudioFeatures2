@@ -12,9 +12,14 @@ class SectionSerializer(serializers.ModelSerializer):
 
 class ContentNodeSerializer(serializers.ModelSerializer):
 
+    rendered_content = serializers.SerializerMethodField('render_content')
+
     class Meta:
         model = ContentNode
         lookup_field = 'uuid'
+
+    def render_content(self, obj):
+        return obj.render_content()
 
 
 class ContentTypeSerializer(serializers.ModelSerializer):

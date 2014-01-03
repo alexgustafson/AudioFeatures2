@@ -387,7 +387,6 @@ select {
     position: relative;
     left: 91.66667%;
     right: auto;
-
   }
 
   /* line 151, ../bower_components/foundation/scss/foundation/components/_grid.scss */
@@ -7740,4 +7739,10 @@ h1, h2, h3, h4, h5, h6 {
 /* line 36, ../scss/app.scss */
 .level_2 h3 {
   font-size: 1.0em;
+}
+
+/* line 43, ../scss/app.scss */
+.section-form li {
+  list-style: none;
+  width: 33%;
 }

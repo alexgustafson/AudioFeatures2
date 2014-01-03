@@ -53,18 +53,27 @@
     <div class="row">
         <div class="large-12 columns">
 
-            <div class="content" ng-controller="AppController">
+            <div class="content" ng-controller="SectionListController">
 
                 <div ng-repeat="section in sections">
-                    <h3 class="panel-title">{$ section.title $}</h3>
+                    <div ng-controller="SectionItemController">
 
-                    <div class="" ng-repeat="item in section.content">
+                        <h3 ng-click="show_edit()" class="panel-title">{$ section.title $}</h3>
 
-                        <div ng-controller="ContentController">{$ content.body $}</div>
+                        <div ng-show="show_edit_panel">
+                            <div class="section-form" ng-sectionform></div>
+                        </div>
+
+                        <div class="" ng-repeat="item in section.content">
+
+                            <div ng-controller="ContentController">
+
+                                <div ng-click="show_edit()" ng-bind-html="content.rendered_content"></div>
+                            </div>
+
+                        </div>
                     </div>
-
                 </div>
-
 
             </div>
         </div>
@@ -75,6 +84,7 @@
         <script src="{{ STATIC_URL }}js/vendor/angular/angular-resource.js"></script>
         <script src="{{ STATIC_URL }}js/vendor/angular/angular-cookies.js"></script>
         <script src="{{ STATIC_URL }}js/vendor/angular/angular-route.js"></script>
+        <script src="{{ STATIC_URL }}js/vendor/angular/angular-sanitize.min.js"></script>
         <script src="{{ STATIC_URL }}js/app.js"></script>
         <script src="{{ STATIC_URL }}js/app/angular-resource.js"></script>
         <script src="{{ STATIC_URL }}js/vendor/d3.v3.js"></script>
@@ -85,9 +95,9 @@
 
             angular.module('audiofeaturesapp').constant('urls', {
                 section: "{% url 'section-list' %}",
+                sectionForm: "{% url 'section-form' %}",
                 content: "{% url 'contentnode-list' %}",
                 plugin: "{% url 'plugin-list' %}"
-
             });
 
             angular.module('audiofeaturesapp').config(['$httpProvider', function ($httpProvider) {

@@ -1,4 +1,4 @@
-var app = angular.module('audiofeaturesapp', ['ngCookies', 'djangoRESTResources', 'ngRoute'], function () {
+var app = angular.module('audiofeaturesapp', ['ngCookies', 'djangoRESTResources', 'ngRoute', 'ngResource', 'ngSanitize'], function () {
 })
 
 app.config(function ($httpProvider) {
@@ -10,18 +10,48 @@ app.config(function ($interpolateProvider) {
     $interpolateProvider.endSymbol('$}');
 });
 
-app.controller('AppController', [
+app.controller('SectionListController', [
     '$scope', 'Sections', function ($scope, Sections) {
         $scope.sections = Sections.query()
-
     }
 ]);
 
-app.controller('ContentController', ['$scope', 'Content', function ($scope, Content) {
-        $scope.content = Content.query({ uuid:$scope.$parent.item})
+app.controller('SectionItemController', [
+    '$scope', 'Sections', function ($scope, Sections) {
 
+        $scope.show_edit = function () {
+            if($scope.show_edit_panel) {
+                $scope.show_edit_panel = false;
+            }else {
+                $scope.show_edit_panel = true;
+            }
+        }
+
+        $scope.update = function () {
+            Sections.update(this.section)
+            $scope.show_edit();
+        }
+    }
+]);
+
+app.controller('ContentController', [
+    '$scope', 'Content', function ($scope, Content) {
+        $scope.content = Content.get({ uuid:$scope.$parent.item})
+
+        $scope.show_edit = function () {
+
+            alert('edit');
+        }
 }]);
 
+app.directive('ngSectionform', ['urls',
+    function(urls) {
+        return {
+            restrict : 'A',
+            templateUrl: urls.sectionForm
+        }
+    }
+]);
 
 
 

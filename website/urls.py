@@ -16,8 +16,6 @@ urlpatterns += i18n_patterns('',
 
     url(r'^$', 'af_documentation.views.home', name='home'),
 
-    url(r'^inplaceeditform/', include('inplaceeditform.urls')),
-
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

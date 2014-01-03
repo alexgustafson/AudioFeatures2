@@ -1,4 +1,3 @@
-
 app.factory('Sections', ['djResource', 'urls',
     function (djResource, urls) {
         return djResource(
@@ -6,7 +5,8 @@ app.factory('Sections', ['djResource', 'urls',
             {uuid: '@uuid'},
             { update: { method: 'PUT' } }
         );
-    }]);
+    }
+]);
 
 app.factory('Content', ['djResource', 'urls',
     function (djResource, urls) {
@@ -15,4 +15,5 @@ app.factory('Content', ['djResource', 'urls',
             {uuid: '@uuid'},
             { update: { method: 'PUT'}}
         );
-    }]);
+    }
+]);
